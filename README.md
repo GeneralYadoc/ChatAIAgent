@@ -55,7 +55,6 @@ Message broker between user and ChatGPT.
   # Wake up internal thread on which ChatGPT answer messages will be generated.
   agent.start()
 
-  cnt = 0
   while True:
     message = input("")
     if message == "":

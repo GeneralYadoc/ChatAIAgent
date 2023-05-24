@@ -6,6 +6,14 @@ Message broker between user and ChatGPT.
 - spool messages which given before ChatGPT finish generating current answer.
 
 ## Hou to install
+
+### Install from PyPI
+- Install package to your environment.<br>
+    ```install
+    $ pip install chatai-agent
+    ```
+
+### Install from GitHub repository
 - Clone this repository.<br>
   ```clone
   $ clone https://github.com/GeneralYadoc/ChatAIAgent.git

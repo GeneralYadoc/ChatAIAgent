@@ -30,7 +30,6 @@ agent = ca.ChatAIAgent( api_key=sys.argv[1],
 # Wake up internal thread on which ChatGPT answer messages will be generated.
 agent.start()
 
-cnt = 0
 while True:
   message = input("")
   if message == "":

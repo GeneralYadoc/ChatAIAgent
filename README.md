@@ -1,4 +1,4 @@
-# StreamChatAgent
+# ChatAIAgent
 Message broker between user and ChatGPT.
 
 ## The user of this library can

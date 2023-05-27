@@ -1,34 +1,39 @@
 import queue
 import time
 import math
+from typing import Callable
+from dataclasses import dataclass
 import threading
 import openai
 
+@dataclass
 class userMessage:
-  def __init__(self, message, extern=None):
-    self.message = message
-    self.extern = extern
+  message: str = ""
+  extern: any = None
+
+@dataclass
+class params:
+  api_key: str
+  system_role: str = "You are a helpful assistant."
+  ask_cb: Callable[[userMessage,], None] = None
+  max_messages_in_context: int = 20
+  answer_cb: Callable[[userMessage, any], None] = None
+  max_queue_size: int = 10
+  model: str = 'gpt-3.5-turbo'
+  max_tokens_per_request: int = 256
+  interval_sec: float = 20.0
 
 class ChatAIAgent(threading.Thread):
-  def __init__( self,
-                api_key="",
-                system_role = "You are a helpful assistant.",
-                ask_cb=None,
-                max_messages_in_context=20,
-                answer_cb=None,
-                max_queue_size=10,
-                model = 'gpt-3.5-turbo',
-                max_tokens_per_request = 256,
-                interval_sec=20.0 ):
-    self.__user_message_queue = queue.Queue(maxsize=max_queue_size)
-    openai.api_key = api_key
-    self.__current_context = [{"role": "system", "content": system_role}]
-    self.__ask_cb = ask_cb
-    self.__max_messages_in_context = max_messages_in_context
-    self.__interval_sec=interval_sec
-    self.__answer_cb = answer_cb
-    self.__model = model
-    self.__max_tokens_per_request = max_tokens_per_request
+  def __init__( self, params ):
+    self.__user_message_queue = queue.Queue(maxsize=params.max_queue_size)
+    openai.api_key = params.api_key
+    self.__current_context = [{"role": "system", "content": params.system_role}]
+    self.__ask_cb = params.ask_cb
+    self.__max_messages_in_context = params.max_messages_in_context
+    self.__interval_sec=params.interval_sec
+    self.__answer_cb = params.answer_cb
+    self.__model = params.model
+    self.__max_tokens_per_request = params.max_tokens_per_request
     self.__keeping_connection = False
     super(ChatAIAgent, self).__init__(daemon=True)
 
@@ -62,11 +67,12 @@ class ChatAIAgent(threading.Thread):
           except:
             completion = None
           time.sleep(0.1)
-        if self.__answer_cb and completion:
-          self.__answer_cb(user_message=user_message, completion=completion)
-        self.__current_context.append({"role": "assistant", "content": completion.choices[0]["message"]["content"]})
-        if len(self.__current_context) >= self.__max_messages_in_context:
-          self.__current_context.pop(1)
+        if completion:
+          if self.__answer_cb:
+            self.__answer_cb(user_message=user_message, completion=completion)
+          self.__current_context.append({"role": "assistant", "content": completion.choices[0]["message"]["content"]})
+          if len(self.__current_context) >= self.__max_messages_in_context:
+            self.__current_context.pop(1)
         self.__sleep_from(start_time)
         start_time = time.time()
 

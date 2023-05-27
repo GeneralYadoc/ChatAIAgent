@@ -12,7 +12,7 @@ def _requires_from_file(filename):
 
 setup(
     name="chatai-agent",
-    version="0.0.1",
+    version="1.0.0",
     license="MIT",
     description="Send messages to ChatGPT and get answers conveniently.",
     author="General Yadoc",

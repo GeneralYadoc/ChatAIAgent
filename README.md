@@ -54,11 +54,14 @@ Message broker between user and ChatGPT.
   system_role="You are a cheerful assistant who speek English and can get conversation exciting with user."
 
   # Create ChatAIAgent instance.
-  agent = ca.ChatAIAgent( api_key=sys.argv[1],
-                          system_role=system_role,
-                          ask_cb=ask_cb,
-                          answer_cb=answer_cb,
-                          max_tokens_per_request = 2048 )
+  params = ca.params(
+    api_key=sys.argv[1],
+    system_role=system_role,
+    ask_cb=ask_cb,
+    answer_cb=answer_cb,
+    max_tokens_per_request = 2048
+  )
+  agent = ca.ChatAIAgent( params )
 
   # Wake up internal thread on which ChatGPT answer messages will be generated.
   agent.start()
@@ -95,8 +98,8 @@ Message broker between user and ChatGPT.
 
   [answer 17:31:16] Meow! Meow! That's the sound a cat makes. Is there anything else you would like me to assist you with?
     ```
-## Arguments of Constractor
-- StreamChatAgent object can be configured with following arguments of its constractor.
+## Arguments of Constructor
+- ChatAIAgent object can be configured with following params given to constructor.
 
     | name | description | default |
     |------|------------|---------|

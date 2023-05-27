@@ -21,11 +21,14 @@ if len(sys.argv) <= 1:
 system_role="You are a cheerful assistant who speek English and can get conversation exciting with user."
 
 # Create ChatAIAgent instance.
-agent = ca.ChatAIAgent( api_key=sys.argv[1],
-                        system_role=system_role,
-                        ask_cb=ask_cb,
-                        answer_cb=answer_cb,
-                        max_tokens_per_request = 2048 )
+params = ca.params(
+  api_key=sys.argv[1],
+  system_role=system_role,
+  ask_cb=ask_cb,
+  answer_cb=answer_cb,
+  max_tokens_per_request = 2048
+)
+agent = ca.ChatAIAgent( params )
 
 # Wake up internal thread on which ChatGPT answer messages will be generated.
 agent.start()

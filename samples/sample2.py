@@ -52,16 +52,20 @@ running = False
 if len(sys.argv) <= 2:
   exit(0)
 
-stream_agent = sca.StreamChatAgent( video_id=sys.argv[1],
-                             get_item_cb=get_item_cb,
-                             pre_filter_cb=pre_filter_cb,
-                             post_filter_cb=post_filter_cb )
+sca_params = sca.params(
+  video_id=sys.argv[1],
+  get_item_cb=get_item_cb,
+  pre_filter_cb=pre_filter_cb,
+  post_filter_cb=post_filter_cb
+)
+stream_agent = sca.StreamChatAgent( sca_params )
 
-system_role="You are a cheerful assistant who speek English and can get conversation exciting with user."
-
-ai_agent = ca.ChatAIAgent( api_key=sys.argv[2],
-                        system_role=system_role,
-                        answer_cb=answer_cb )
+ca_params = ca.params(
+  api_key=sys.argv[2],
+  system_role="You are a cheerful assistant who speek English and can get conversation exciting with user.",
+  answer_cb=answer_cb
+)
+ai_agent = ca.ChatAIAgent( ca_params )
 
 running = True
 stream_agent.start()

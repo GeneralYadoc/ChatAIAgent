@@ -5,7 +5,7 @@ Message broker between user and ChatGPT.
 - easily give role and messages to ChatGPT, and obtain answers.
 - spool messages which given before ChatGPT finish generating current answer.
 
-## Hou to install
+## How to install
 
 ### Install from PyPI
 - Install package to your environment.<br>

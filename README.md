@@ -147,7 +147,7 @@ And other [threading.Thread](https://docs.python.org/3/library/threading.html) p
 - It's not be assumed that any values are returned.
 
 ## Concept of design
-- User message is put on internal queue and treated on internal thiread.<br>
+- User message is put on internal queue and treated on internal thread.<br>
 This feature gives advantage when You put ChatGPT on chat stream.<br>
 Please try [this sample](samples/sample2.py) to experience the benefit.
   ```usage

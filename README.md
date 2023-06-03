@@ -157,6 +157,6 @@ Please try [this sample](samples/sample2.py) to experience the benefit.
 - The system role given by user remains ever as the oldest sentence of current context even if the number of messages is reached to the maximum, so ChatGPT doesn't forgot the role while current cunversation.
 
 ## Links
-StreamingChaatAgent uses following libraries internally.
+ChatAIAgent uses following libraries internally.
 
 - [streamchat-agent](https://github.com/GeneralYadoc/StreamChatAgent)<br> YouTube chat poller which can get massages very smothly by using internal queue.

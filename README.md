@@ -134,6 +134,10 @@ Message broker between user and ChatGPT.
 - Internal process will be terminated soon after.
 - No arguments required, nothing returns.
 
+### full_messages()
+- Indicate whether internal message queue is full or not.
+- No argments required, Boolean returns.
+
 And other [threading.Thread](https://docs.python.org/3/library/threading.html) public pethods are available.
 
 ## Callbacks

@@ -49,6 +49,9 @@ class ChatAIAgent(threading.Thread):
       self.__user_message_queue.get()
     self.__user_message_queue.put(user_message)
 
+  def full_messages(self):
+    return self.__user_message_queue.full()
+
   def run(self):
     self.__keeping_connection = True
     while self.__keeping_connection:

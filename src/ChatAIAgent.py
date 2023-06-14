@@ -76,8 +76,8 @@ class ChatAIAgent(threading.Thread):
           self.__current_context.append({"role": "assistant", "content": completion.choices[0]["message"]["content"]})
           if len(self.__current_context) >= self.__max_messages_in_context:
             self.__current_context.pop(1)
-        self.__sleep_from(start_time)
-        start_time = time.time()
+      self.__sleep_from(start_time)
+      start_time = time.time()
 
   def __sleep_from(self, start_time, interval_sec=None):
     if not interval_sec:

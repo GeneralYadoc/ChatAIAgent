@@ -17,12 +17,12 @@ def print_incremental(st, interval_sec):
     interruptible_sleep(interval_sec)
 
 def interruptible_sleep(time_sec):
-  counter = math.floor(time_sec / 0.01)
-  frac = time_sec - (counter * 0.01)
+  counter = math.floor(time_sec / 0.1)
+  frac = time_sec - (counter * 0.1)
   for i in range(counter):
     if not running:
       break
-    time.sleep(0.01)
+    time.sleep(0.1)
   if not running:
     return
   time.sleep(frac)
